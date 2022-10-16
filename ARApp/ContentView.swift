@@ -98,15 +98,15 @@ struct ARViewContainer: UIViewRepresentable {
         func session(_ session: ARSession, didUpdate frame: ARFrame) {
             if let sceneDepth = frame.smoothedSceneDepth {
                 let depthData = sceneDepth.depthMap
-                let depthWidth = CVPixelBufferGetWidth(depthData)
-                let depthHeight = CVPixelBufferGetHeight(depthData)
+                let depthWidth = CVPixelBufferGetWidth(depthData) // 256
+                let depthHeight = CVPixelBufferGetHeight(depthData) // 192
                 
                 CVPixelBufferLockBaseAddress(depthData, CVPixelBufferLockFlags(rawValue: 0))
                 let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(depthData), to: UnsafeMutablePointer<Float32>.self)
                 var minDist: Float32 = 1000000
-                for y in 0...depthHeight-1 {
-                    for x in 0...depthWidth-1 {
-                        let distXY = floatBuffer[y * depthWidth + x]
+                for x in 71...121 { //width (0 to 192-1)
+                    for y in 103...178 { //height (0 to 256-1)
+                        let distXY = floatBuffer[x * depthWidth + y]
                         if minDist > distXY {
                             minDist = distXY
                         }
