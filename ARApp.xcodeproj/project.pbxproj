@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CCC1B03628FBF3EF00221C6D /* beep.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CCC1B03528FBF3EF00221C6D /* beep.m4a */; };
 		CCD7B83A28FB8A0F005D7446 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD7B83928FB8A0F005D7446 /* AppDelegate.swift */; };
 		CCD7B83C28FB8A0F005D7446 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD7B83B28FB8A0F005D7446 /* ContentView.swift */; };
 		CCD7B83E28FB8A0F005D7446 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = CCD7B83D28FB8A0F005D7446 /* Experience.rcproject */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CCC1B03528FBF3EF00221C6D /* beep.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = beep.m4a; sourceTree = "<group>"; };
 		CCD7B83628FB8A0F005D7446 /* ARApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCD7B83928FB8A0F005D7446 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCD7B83B28FB8A0F005D7446 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 				CCD7B83D28FB8A0F005D7446 /* Experience.rcproject */,
 				CCD7B83F28FB8A11005D7446 /* Assets.xcassets */,
 				CCD7B84128FB8A11005D7446 /* Preview Content */,
+				CCC1B03528FBF3EF00221C6D /* beep.m4a */,
 			);
 			path = ARApp;
 			sourceTree = "<group>";
@@ -129,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCD7B84328FB8A11005D7446 /* Preview Assets.xcassets in Resources */,
+				CCC1B03628FBF3EF00221C6D /* beep.m4a in Resources */,
 				CCD7B84028FB8A11005D7446 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

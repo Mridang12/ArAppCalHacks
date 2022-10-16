@@ -81,11 +81,21 @@ struct ARViewContainer: UIViewRepresentable {
         return Coordinator(sceneDepthStr: $sceneDepthStr)
     }
     
-    class Coordinator: NSObject, ARSessionDelegate {
+    class Coordinator: NSObject, ARSessionDelegate, AVAudioPlayerDelegate {
         @Binding var sceneDepthStr: String
-    
+        var isAudioPlaying: Bool = false
+        
+        var audioPlayer: AVAudioPlayer!
+        
+        var repeatFreq:Float = 5.0
+        
         init(sceneDepthStr: Binding<String>) {
             _sceneDepthStr = sceneDepthStr
+            
+            let beepFile = URL(filePath: Bundle.main.path(forResource: "beep", ofType: "m4a")!)
+            audioPlayer =  try? AVAudioPlayer(contentsOf: beepFile)
+            super.init()
+            audioPlayer.delegate = self
         }
         
         func session(_ session: ARSession, didUpdate frame: ARFrame) {
@@ -96,7 +106,6 @@ struct ARViewContainer: UIViewRepresentable {
                 
                 CVPixelBufferLockBaseAddress(depthData, CVPixelBufferLockFlags(rawValue: 0))
                 let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(depthData), to: UnsafeMutablePointer<Float32>.self)
-                
                 var minDist: Float32 = 1000000
                 for y in 0...depthHeight-1 {
                     for x in 0...depthWidth-1 {
@@ -106,7 +115,41 @@ struct ARViewContainer: UIViewRepresentable {
                         }
                     }
                 }
-                self.sceneDepthStr = "\(round(minDist * 100) / 100.0)"
+                let roundedDist = round(minDist * 100) / 100.0
+                self.sceneDepthStr = "\(roundedDist)"
+                print("---- \(roundedDist)")
+                if roundedDist <= 1 {
+                    repeatFreq = roundedDist * 3
+                    if roundedDist < 0.25 {
+                        repeatFreq *= 1/5
+                    } else if roundedDist < 0.5 {
+                        repeatFreq *= 1/2
+                    }
+                    
+                    if !isAudioPlaying {
+                        isAudioPlaying = true
+                        audioPlayer.prepareToPlay()
+                        playBeep()
+                    }
+                } else {
+                    if isAudioPlaying {
+                        isAudioPlaying = false
+                        audioPlayer.stop()
+                    }
+                }
+            }
+        }
+        
+        
+        @objc func playBeep() {
+            audioPlayer.play()
+        }
+        
+        func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+            print("SAFDKLASDFnkm")
+            print("------ \(isAudioPlaying)")
+            if isAudioPlaying {
+                self.perform(#selector(playBeep), with: nil, afterDelay: Double(self.repeatFreq))
             }
         }
         
