@@ -9,8 +9,25 @@ import SwiftUI
 import RealityKit
 
 struct ContentView : View {
+
     var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(.all)
+        ZStack {
+            ARViewContainer().edgesIgnoringSafeArea(.all)
+            
+            Button(
+                action: {
+                    print("Picture taken")
+                }
+            ) {
+                Text("Take a Picture").frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            
+        }
+//        Color.clear
+//            .contentShape(Rectangle())
+//            .onTapGesture {
+//                print("I PRESSED.")
+//            }
     }
 }
 
