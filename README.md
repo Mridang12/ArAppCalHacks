@@ -27,3 +27,6 @@ swiftui
 yolov3
 
 ## Downdload and Try it out!
+
+YoloV3 AI model: https://ml-assets.apple.com/coreml/models/Image/ObjectDetection/YOLOv3/YOLOv3.mlmodel
+Could not be uploaded to github because size is too big
