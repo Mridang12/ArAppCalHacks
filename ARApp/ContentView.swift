@@ -11,15 +11,17 @@ import ARKit
 import AVFoundation
 
 struct ContentView : View {
-    @State var supportsLIDAR: Bool = false
     @State var sceneDepthStr: String
     var body: some View {
         ZStack {
-            ARViewContainer(supportsLIDAR: $supportsLIDAR, sceneDepthStr: $sceneDepthStr).edgesIgnoringSafeArea(.all)
+            ARViewContainer(sceneDepthStr: $sceneDepthStr).edgesIgnoringSafeArea(.all)
             VStack {
-                Spacer()
-                Text("Supports LIDAR: \(supportsLIDAR.description)")
-                Text("Depth: \(self.sceneDepthStr)")
+                Text("Distance: \(self.sceneDepthStr) cm")
+                    .background(Color.gray.opacity(0.5))
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .font(.title)
+                    .bold()
                 Spacer()
             }
             
@@ -39,7 +41,6 @@ struct ContentView : View {
 
 struct ARViewContainer: UIViewRepresentable {
     
-    @Binding var supportsLIDAR: Bool
     @Binding var sceneDepthStr: String
     
     func makeUIView(context: Context) -> ARView {
@@ -53,11 +54,6 @@ struct ARViewContainer: UIViewRepresentable {
         
         if ARWorldTrackingConfiguration.supportsFrameSemantics(.smoothedSceneDepth) {
             config.frameSemantics = .smoothedSceneDepth
-            
-            
-            DispatchQueue.main.async {
-                supportsLIDAR = true
-            }
         } else {
             // TODO: Raise Error
         }
@@ -84,6 +80,7 @@ struct ARViewContainer: UIViewRepresentable {
     class Coordinator: NSObject, ARSessionDelegate, AVAudioPlayerDelegate {
         @Binding var sceneDepthStr: String
         var isAudioPlaying: Bool = false
+        var readDistance: Bool = false
         
         var audioPlayer: AVAudioPlayer!
         
@@ -116,25 +113,35 @@ struct ARViewContainer: UIViewRepresentable {
                     }
                 }
                 let roundedDist = round(minDist * 100) / 100.0
-                self.sceneDepthStr = "\(roundedDist)"
-                print("---- \(roundedDist)")
-                if roundedDist <= 1 {
-                    repeatFreq = roundedDist * 3
-                    if roundedDist < 0.25 {
-                        repeatFreq *= 1/5
-                    } else if roundedDist < 0.5 {
-                        repeatFreq *= 1/2
-                    }
-                    
-                    if !isAudioPlaying {
-                        isAudioPlaying = true
-                        audioPlayer.prepareToPlay()
-                        playBeep()
-                    }
-                } else {
-                    if isAudioPlaying {
-                        isAudioPlaying = false
-                        audioPlayer.stop()
+                DispatchQueue.main.async { [weak self] in
+                    self?.sceneDepthStr = "\(Int(roundedDist * 100))"
+                    var repeatFreq: Float = 0
+                    if roundedDist <= 1 {
+                        if !self!.readDistance {
+                            self?.readDistance = true
+                            Speaker.sharedInstance.speak(text: "Object 3 feet ahead")
+                        }
+                        repeatFreq = roundedDist * 3
+                        if roundedDist < 0.25 {
+                            repeatFreq *= 1/5
+                        } else if roundedDist < 0.5 {
+                            repeatFreq *= 1/2
+                        }
+                        self?.repeatFreq = repeatFreq
+                        
+                        if !self!.isAudioPlaying {
+                            self?.isAudioPlaying = true
+                            self?.audioPlayer.prepareToPlay()
+                            self?.playBeep()
+                        }
+                    } else {
+                        if self!.readDistance {
+                            self?.readDistance = false
+                        }
+                        if self!.isAudioPlaying {
+                            self?.isAudioPlaying = false
+                            self?.audioPlayer.stop()
+                        }
                     }
                 }
             }
@@ -146,8 +153,6 @@ struct ARViewContainer: UIViewRepresentable {
         }
         
         func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-            print("SAFDKLASDFnkm")
-            print("------ \(isAudioPlaying)")
             if isAudioPlaying {
                 self.perform(#selector(playBeep), with: nil, afterDelay: Double(self.repeatFreq))
             }
