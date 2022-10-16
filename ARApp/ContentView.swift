@@ -8,6 +8,7 @@
 import SwiftUI
 import RealityKit
 import ARKit
+import AVFoundation
 
 struct ContentView : View {
     @State var supportsLIDAR: Bool = false
@@ -24,6 +25,7 @@ struct ContentView : View {
             
             Button(
                 action: {
+                    Speaker.sharedInstance.speak(text: "Stop touching me.")
                     print("Picture taken")
                 }
             ) {
@@ -122,3 +124,17 @@ struct ContentView_Previews : PreviewProvider {
     }
 }
 #endif
+
+
+class Speaker {
+    static let sharedInstance = Speaker()
+    let speechSynthesizer = AVSpeechSynthesizer()
+    
+    func speak(text: String) {
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.pitchMultiplier = 1.0
+        utterance.rate = 0.6
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        speechSynthesizer.speak(utterance)
+    }
+}
