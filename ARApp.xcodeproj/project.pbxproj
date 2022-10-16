@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90D058C328FC2A8600846D2C /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D058C228FC2A8600846D2C /* logo.png */; };
 		CCC1B03628FBF3EF00221C6D /* beep.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CCC1B03528FBF3EF00221C6D /* beep.m4a */; };
 		CCD7B83A28FB8A0F005D7446 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD7B83928FB8A0F005D7446 /* AppDelegate.swift */; };
 		CCD7B83C28FB8A0F005D7446 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD7B83B28FB8A0F005D7446 /* ContentView.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		90D058C228FC2A8600846D2C /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../../logo.png; sourceTree = "<group>"; };
 		CCC1B03528FBF3EF00221C6D /* beep.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = beep.m4a; sourceTree = "<group>"; };
 		CCD7B83628FB8A0F005D7446 /* ARApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCD7B83928FB8A0F005D7446 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				CCD7B83F28FB8A11005D7446 /* Assets.xcassets */,
 				CCD7B84128FB8A11005D7446 /* Preview Content */,
 				CCC1B03528FBF3EF00221C6D /* beep.m4a */,
+				90D058C228FC2A8600846D2C /* logo.png */,
 			);
 			path = ARApp;
 			sourceTree = "<group>";
@@ -131,6 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90D058C328FC2A8600846D2C /* logo.png in Resources */,
 				CCD7B84328FB8A11005D7446 /* Preview Assets.xcassets in Resources */,
 				CCC1B03628FBF3EF00221C6D /* beep.m4a in Resources */,
 				CCD7B84028FB8A11005D7446 /* Assets.xcassets in Resources */,
@@ -272,10 +276,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ARApp/Preview Content\"";
-				DEVELOPMENT_TEAM = E74RL6EUDC;
+				DEVELOPMENT_TEAM = Y4PWV8K87A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
@@ -290,7 +295,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mridangsheth.ARApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fiona.ARApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -303,10 +308,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ARApp/Preview Content\"";
-				DEVELOPMENT_TEAM = E74RL6EUDC;
+				DEVELOPMENT_TEAM = Y4PWV8K87A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
@@ -321,7 +327,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mridangsheth.ARApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fiona.ARApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
